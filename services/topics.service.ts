@@ -1,9 +1,5 @@
 import {apiConfig} from "~/config/api";
 
-export const getTopics = async (): Promise<TopicResponse[]> => {
-    return new TopicsService().getTopics();
-};
-
 export class TopicsService {
     private _paginationParams = {per_page: "100"};
     private _orderParams = {orderby: "title", order: "asc"};
@@ -13,11 +9,11 @@ export class TopicsService {
     }
 
     public getTopic(topicId: number): Promise<TopicResponse> {
-        return this._fetchTopic({id: topicId});
+        return this._fetchTopic({id: topicId}) as Promise<TopicResponse>;
     }
 
     public getTopicBySlug(topicSlug: string): Promise<TopicResponse[]> {
-        return this._fetchTopic({slug: topicSlug});
+        return this._fetchTopic({slug: topicSlug}) as Promise<TopicResponse[]>;
     }
 
     public unionPreviewMediaIds(topics: TopicResponse[]) {
