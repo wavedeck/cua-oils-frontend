@@ -1,10 +1,10 @@
 <template>
   <section
-    class="page-hero"
-    :style="{ '--background-image': `url(${backgroundImage})` }"
+      class="page-hero"
+      :style="{ '--background-image': `url(${backgroundImage})` }"
   >
     <div class="container mx-auto page-hero__container">
-      <img alt="" src="/img/theme/flower_main.svg" class="page-hero__icon" />
+      <img alt="" src="/img/theme/flower_main.svg" class="page-hero__icon"/>
       <h1 class="page-hero__title">{{ title }}</h1>
       <h2 class="page-hero__subtitle">{{ subtitle }}</h2>
     </div>
@@ -12,7 +12,7 @@
 </template>
 
 <script setup lang="ts">
-const props = defineProps({
+defineProps({
   title: {
     type: String,
     required: true,
@@ -26,7 +26,7 @@ const props = defineProps({
     type: String,
     required: false,
     default:
-      "https://bms-oils-web.invadox.dev/wp-content/uploads/2023/12/IMG_6275-70.webp",
+        "https://bms-oils-web.invadox.dev/wp-content/uploads/2023/12/IMG_6275-70.webp",
   },
 });
 </script>
@@ -36,9 +36,9 @@ const props = defineProps({
   background-size: cover;
   background-repeat: no-repeat;
   background-image: linear-gradient(1deg, #304b79 21%, rgba(0, 0, 0, 0) 100%),
-    var(--background-image);
+  var(--background-image);
   text-align: left;
-  background-position: 0% 50%;
+  background-position: 0 50%;
 }
 
 .page-hero__container {
@@ -62,7 +62,7 @@ const props = defineProps({
 .page-hero__subtitle {
   margin: 0;
   font-weight: 400;
-  font-family: "Map Roman";
+  font-family: "Map Roman", serif;
   text-align: center;
 }
 
