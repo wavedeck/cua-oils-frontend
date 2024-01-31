@@ -11,13 +11,29 @@ export class Topic {
         return this._data;
     }
 
+    public getTitle(): string {
+        return this._data.title.rendered ?? "";
+    }
+
     public getPreviewImageId(): number | null {
         return this._data.acf["preview-image"] ?? null;
     }
 
-    public getTitle(): string {
-        return this._data.title.rendered ?? "";
+    public getPostImageId(): number | null
+    {
+        return this._data.acf["post-image"] ?? null;
     }
+
+    public getPostHeaderId(): number | null
+    {
+        return this._data.acf["post-header"] ?? null;
+    }
+
+    public getPostGalleryIds(): number[]
+    {
+        return this._data.acf["post-gallery"] ?? [];
+    }
+
 }
 
 export default Topic;
