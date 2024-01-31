@@ -1,0 +1,36 @@
+@font-face {
+    font-family: 'Map Roman';
+    font-weight: 400;
+    font-style: normal;
+    src: url(/fonts/map-roman.woff2) format('woff2'),url(/fonts/map-roman.woff) format('woff');
+    font-display: swap
+}
+
+@font-face {
+    font-family: 'Glacial Indifference';
+    font-weight: 400;
+    font-style: normal;
+    src: url(/fonts/GlacialIndifference-Regular.woff2) format('woff2'),url(/fonts/GlacialIndifference-Regular.woff) format('woff');
+    font-display: swap
+}
+
+@font-face {
+    font-family: 'Glacial Indifference';
+    font-weight: 700;
+    font-style: normal;
+    src: url(/fonts/GlacialIndifference-Bold.woff2) format('woff2'),url(/fonts/GlacialIndifference-Bold.woff) format('woff');
+    font-display: swap
+}
+
+:root {
+    --fh-map-roman: 'Map Roman';
+    --fh-glacial-indifference: 'Glacial Indifference';
+}
+
+.has-map-roman-font-family {
+    font-family: var(--fh-map-roman)
+}
+
+.has-glacial-indifference-font-family {
+    font-family: var(--fh-glacial-indifference)
+}
