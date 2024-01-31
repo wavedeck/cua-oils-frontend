@@ -1,54 +1,87 @@
 <template>
   <PageHero
-      :title="topic!.title.rendered"
+      :backgroundImage="topic?.acf.postHeaderUrl"
+      :title="topic?.title.rendered"
       subtitle="BMS OILS ACADEMY"
-      :backgroundImage="topic!.acf.postImageMedia?.media_details.sizes.full.source_url"
   />
-  <section class="topic-content">
+  <section v-if="topic" class="topic-content">
     <div class="container mx-auto">
       <img
-          :src="topic!.acf.postImageMedia?.media_details.sizes.full.source_url"
+          :src="topic.acf.postImageUrl"
           alt=""
       />
       <div
-          v-html="topic!.acf['post-content']"
           class="topic-content__content"
+          v-html="topic.acf['post-content']"
       ></div>
     </div>
   </section>
-  <section class="topic-gallery" v-if="topic!.acf.postGalleryMedia">
+  <section v-if="topic?.acf.postGalleryUrls" class="topic-gallery">
     <div class="container mx-auto">
       <img
-        v-for="image in topic!.acf.postGalleryMedia"
-        :key="image.id"
-        :src="image.media_details.sizes.full.source_url"
-        alt=""
+          v-for="imageUrl in topic.acf.postGalleryUrls"
+          :key="imageUrl.id"
+          :src="imageUrl.src"
+          alt=""
       />
     </div>
   </section>
+  {{ error }}
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
 import {useRoute} from "vue-router";
 import {useAsyncData} from "nuxt/app";
-import {TopicsService} from "~/services/topics.service";
-import {MediaService} from "~/services/media.service";
+import TopicsService from "~/core/topics/topics.service";
+import MediaService from "~/core/media/media.service";
+import type {MediaResponse} from "~/core/media/media.repository";
 
 const route = useRoute();
+const {slug} = route.params;
 
-const {data: topic} = useAsyncData(
-    `topic_${route.params.slug}`,
-    async () => {
-      const slug = route.params.slug as string;
+const getTopicBySlug = async (slug: string) => {
+  const topicsService = new TopicsService();
+  const mediaService = new MediaService();
 
-      const topicsService = new TopicsService();
-      const mediaService = new MediaService();
+  const topic = await topicsService.getTopicBySlug(slug);
+  const mediaIds: number[] = [];
 
-      const topicData = await topicsService.getTopicBySlug(slug);
-      const mediaIds = topicsService.unionMediaIds(topicData);
-      const mediaData = await mediaService.getMedia(mediaIds);
-      return mapMediaToTopics(topicData, mediaData)[0];
-    }
+  if (topic.getPostHeaderId()) {
+    mediaIds.push(topic.getPostHeaderId()!);
+  }
+
+  if (topic.getPostImageId()) {
+    mediaIds.push(topic.getPostImageId()!);
+  }
+
+  if (topic.getPostGalleryIds()) {
+    mediaIds.push(...topic.getPostGalleryIds()!);
+  }
+
+  const mediaData = await mediaService.getManyMedia(mediaIds);
+  const topicPojo = topic.getData();
+
+  const getUrl = (media?: MediaResponse) => {
+    if (!media) return null;
+
+    return Object.keys(media.media_details.sizes).length === 0
+        ? media.source_url
+        : media.media_details.sizes['full']
+            ? media.media_details.sizes['full'].source_url
+            : null;
+  };
+
+  topicPojo.acf.postHeaderUrl = getUrl(mediaData.find(media => media.id === topic.getPostHeaderId()));
+  topicPojo.acf.postImageUrl = getUrl(mediaData.find(media => media.id === topic.getPostImageId()));
+  topicPojo.acf.postGalleryUrls = mediaData.filter(media => topic.getPostGalleryIds()?.includes(media.id))
+      .map(media => ({id: media.id, src: getUrl(media)}));
+
+  return topicPojo;
+};
+
+
+const {data: topic, error, pending} = useAsyncData(
+    () => getTopicBySlug(slug as string),
 );
 </script>
 
