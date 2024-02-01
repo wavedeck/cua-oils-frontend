@@ -1,19 +1,21 @@
 <template>
   <section class="overview-topic-list">
     <div class="container mx-auto">
-      <div
-          v-for="topic in data?.topics"
-          :key="topic.id"
-          class="overview-topic-list__topic"
-      >
-        <a :href="`/topic/${topic.slug}`" class="topic__linkwrapper"
-        ><img
-            :alt="topic.__title"
-            class="topic__image"
-            :src="topic.__previewImage"
-        /></a>
+      <div class="overview-topic-list__wrapper">
+        <div
+            v-for="topic in data?.topics"
+            :key="topic.id"
+            class="overview-topic-list__topic"
+        >
+          <a :href="`/topic/${topic.slug}`" class="topic__linkwrapper"
+          ><img
+              :alt="topic.__title"
+              :src="topic.__previewImage"
+              class="topic__image"
+          /></a>
+        </div>
+        {{ error }}
       </div>
-      {{ error }}
     </div>
   </section>
 </template>
@@ -61,10 +63,38 @@ const {data, error} = await useAsyncData('topics-list', getTopics)
 </script>
 
 <style scoped>
+
+.overview-topic-list__wrapper {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
 .overview-topic-list__topic .topic__linkwrapper {
   display: block;
   width: 100%;
   height: 100%;
-  margin-bottom: 1rem;
 }
+
+/* Tablet: 2 columns */
+@media (min-width: 768px) {
+  .overview-topic-list__wrapper {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* Laptop: 3 columns */
+@media (min-width: 1024px) {
+  .overview-topic-list__wrapper {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+/* Desktop: 4 columns */
+@media (min-width: 1200px) {
+  .overview-topic-list__wrapper {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+}
+
 </style>

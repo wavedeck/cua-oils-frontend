@@ -1,7 +1,7 @@
 <template>
   <PageHero title="BMS OILS ACADEMY" subtitle="Kundenbereich" />
   <section id="section-6-485" class="ct-section">
-    <div class="container mx-auto" style="padding: 2rem 1rem">
+    <div class="container mx-auto">
       <div
         id="text_block-7-485"
         class="ct-text-block"
@@ -34,5 +34,29 @@
       </div>
     </div>
   </section>
-  <TopicList />
+  <section class="overview-topics">
+    <TopicList />
+  </section>
 </template>
+
+<style scoped>
+
+#section-6-485 .container {
+  padding: 2rem 1rem;
+}
+
+.overview-topics {
+  padding: 2rem 0;
+}
+
+@media (min-width: 992px) {
+  .overview-topics {
+    padding: 4rem 0;
+  }
+
+  #section-6-485 .container {
+    padding-top: 4rem;
+    max-width: 60%;
+  }
+}
+</style>

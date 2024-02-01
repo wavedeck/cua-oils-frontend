@@ -9,6 +9,7 @@
       <img
           :src="topic.acf.postImageUrl"
           alt=""
+          class="topic-content__image"
       />
       <div
           class="topic-content__content"
@@ -18,12 +19,15 @@
   </section>
   <section v-if="topic?.acf.postGalleryUrls" class="topic-gallery">
     <div class="container mx-auto">
+      <div class="topic-gallery__wrapper">
       <img
           v-for="imageUrl in topic.acf.postGalleryUrls"
           :key="imageUrl.id"
           :src="imageUrl.src"
+          @click="openImageInNewTab(imageUrl.src)"
           alt=""
       />
+      </div>
     </div>
   </section>
   {{ error }}
@@ -83,6 +87,11 @@ const getTopicBySlug = async (slug: string) => {
 const {data: topic, error, pending} = useAsyncData(
     () => getTopicBySlug(slug as string),
 );
+
+const openImageInNewTab = (url: string) => {
+  window.open(url, '_blank');
+}
+
 </script>
 
 <style scoped>
@@ -91,7 +100,55 @@ const {data: topic, error, pending} = useAsyncData(
   padding: 2rem 0;
 }
 
-.topic-content__content {
-  margin-top: 2rem;
+.topic-content__image {
+  width: 100%;
+  height: auto;
 }
+
+.topic-content .container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+.topic-gallery__wrapper {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+@media screen and (min-width: 768px) {
+  .topic-content {
+    padding: 6rem 0;
+  }
+  .topic-content .container {
+    flex-direction: row;
+  }
+
+  .topic-content__image {
+    width: 40%;
+  }
+
+  .topic-content__content {
+    width: 60%;
+  }
+
+  .topic-gallery__wrapper {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .topic-gallery__wrapper {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .topic-gallery__wrapper {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+}
+
 </style>
