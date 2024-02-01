@@ -4,8 +4,8 @@
       :style="{ '--background-image': `url(${backgroundImage})` }"
   >
     <div class="container mx-auto page-hero__container">
-      <img alt="" src="/img/theme/flower_main.svg" class="page-hero__icon"/>
-      <h1 class="page-hero__title">{{ title }}</h1>
+      <img :alt="title" src="/img/theme/flower_main.svg" class="page-hero__icon"/>
+      <h1 class="page-hero__title" v-html="title"></h1>
       <h2 class="page-hero__subtitle">{{ subtitle }}</h2>
     </div>
   </section>
