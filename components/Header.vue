@@ -1,6 +1,6 @@
 <template>
   <header id="main-header">
-    <div class="container main-header__container">
+    <div class="container main-header__container mx-auto">
       <a id="main-header__logo" href="/">
         <img
           id="image-3-15"
@@ -32,8 +32,24 @@
             <ul id="menu-header" class="oxy-pro-menu-list">
               <li class="menu-item">
                 <a
-                  href="https://bms-oils-web.invadox.dev/"
+                  href="/"
                   class="menu-item-link"
+                >
+                  Start
+                </a>
+              </li>
+              <li class="menu-item">
+                <a
+                    href="https://bms-oils-web.invadox.dev/bms-oils-lexikon/"
+                    class="menu-item-link"
+                >
+                  Öle Lexikon
+                </a>
+              </li>
+              <li class="menu-item">
+                <a
+                    href="https://bms-oils-web.invadox.dev/"
+                    class="menu-item-link"
                 >
                   &laquo; Zurück zur Website
                 </a>
