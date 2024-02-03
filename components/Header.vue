@@ -40,7 +40,7 @@
               </li>
               <li class="menu-item">
                 <a
-                    href="https://bms-oils-web.invadox.dev/bms-oils-lexikon/"
+                    href="/lexikon"
                     class="menu-item-link"
                 >
                   Öle Lexikon
