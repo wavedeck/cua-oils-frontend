@@ -23,6 +23,7 @@ export interface Oil {
     beschreibung: string;
     rezepte?: number[];
     video?: string;
+    [key: string]: any;
   };
 }
 
