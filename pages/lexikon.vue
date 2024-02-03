@@ -92,7 +92,7 @@ const getOilsForLetter = (letter: string): Oil[] => {
           <h3 class="itemgroup__title">{{ letter }}</h3>
           <ul class="itemgroup__listing">
             <li v-for="(oil, idx) in getOilsForLetter(letter)" :key="idx" class="itemgroup__item">
-              <a :href="oil.link" class="itemgroup__link">
+              <a :href="`/oils/${oil.slug}`" class="itemgroup__link">
                 {{ oil.title.rendered }}
               </a>
             </li>
