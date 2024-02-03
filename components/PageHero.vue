@@ -5,8 +5,10 @@
   >
     <div class="container mx-auto page-hero__container">
       <img :alt="title" src="/img/theme/flower_main.svg" class="page-hero__icon"/>
-      <h1 class="page-hero__title" v-html="title"></h1>
-      <h2 class="page-hero__subtitle">{{ subtitle }}</h2>
+      <div class="page-hero__content">
+        <h1 class="page-hero__title" v-html="title"></h1>
+        <h2 class="page-hero__subtitle">{{ subtitle }}</h2>
+      </div>
     </div>
   </section>
 </template>
@@ -35,8 +37,7 @@ defineProps({
 .page-hero {
   background-size: cover;
   background-repeat: no-repeat;
-  background-image: linear-gradient(1deg, #304b79 21%, rgba(0, 0, 0, 0) 100%),
-  var(--background-image);
+  background-image: var(--background-image);
   text-align: left;
   background-position: 0 50%;
 }
@@ -54,8 +55,14 @@ defineProps({
   border: 2px solid #304b79;
   border-radius: 50%;
   padding: 1rem;
-  width: 5.5rem;
-  height: 5.5rem;
+  width: 6rem;
+  height: 6rem;
+}
+
+.page-hero__content {
+  background: rgba(44, 49, 90, 0.8);
+  margin-top: 2rem;
+  padding: 0.5rem 1rem;
 }
 
 .page-hero__title,
@@ -67,7 +74,6 @@ defineProps({
 }
 
 .page-hero__title {
-  margin-top: 2rem;
   font-size: 1.85rem;
   color: #dbb03d;
 }
