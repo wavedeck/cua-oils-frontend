@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 
 // Define a type for oil objects
-interface Oil {
+export interface Oil {
   id: number;
   date: string;
   date_gmt: string;
