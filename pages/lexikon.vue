@@ -64,9 +64,8 @@ const availableLetters = oils.map((oil: Oil) => oil.title.rendered.charAt(0).toU
 const oilLetters = Array.from(new Set(availableLetters)).sort();
 
 const getOilsForLetter = (letter: string): Oil[] => {
-  const filteredOils = oils.filter(oil => oil.title.rendered.charAt(0).toUpperCase() === letter);
+  return oils.filter(oil => oil.title.rendered.charAt(0).toUpperCase() === letter);
   // return oils.sort(); // not necessary with api since it's already sorted
-  return filteredOils; // not necessary with api since it's already sorted
 };
 
 </script>
