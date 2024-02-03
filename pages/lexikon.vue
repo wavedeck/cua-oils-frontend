@@ -145,10 +145,9 @@ const getOilsForLetter = (letter: string): Oil[] => {
 }
 
 .lexikon-oils-list .itemgroup__listing {
-  display: flex;
-  flex-wrap: wrap;
-  column-gap: 6rem;
-  row-gap: 1rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
 }
 
 .lexikon-oils-list .itemgroup__item {
@@ -164,6 +163,10 @@ const getOilsForLetter = (letter: string): Oil[] => {
 @media (min-width: 992px) {
   .lexikon-oils-list .itemgroup__link {
     font-size: 1.5rem;
+  }
+
+  .lexikon-oils-list .itemgroup__listing {
+    grid-template-columns: 1fr 1fr 1fr;
   }
 }
 
