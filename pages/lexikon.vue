@@ -49,13 +49,14 @@ const fetchTotalPages = async () => {
 const fetchAllOils = async (): Promise<Oil[]> => {
   // setup request params
   const totalPages = await fetchTotalPages();
+  if(!totalPages) throw new Error('No total pages found');
   const urlParams = new URLSearchParams({
     per_page: apiPerPage.toString(),
     order_by: 'title',
     order: 'asc'
   }).toString();
 
-  const requests = Array.from({ length: totalPages }, (_, i) => {
+  const requests = Array.from({ length: +totalPages }, (_, i) => {
     return $fetch<Oil[]>(`https://bms-oils-web.invadox.dev/wp-json/wp/v2/bms_oils?${urlParams}&page=${i+1}`);
   });
   const responses = await Promise.all(requests);
