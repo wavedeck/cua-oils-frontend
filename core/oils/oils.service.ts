@@ -1,4 +1,5 @@
 import type OilsRepository from "~/core/oils/oils.repository";
+import type {FetchManyOptions} from "~/core/oils/oils.types";
 
 export class OilsService {
     private repository: OilsRepository;
@@ -7,7 +8,7 @@ export class OilsService {
         this.repository = repository;
     }
 
-    public async getManyOils() {
+    public async getManyOils(options: FetchManyOptions) {
         return this.repository.getManyOils({allPages: true})
     }
 
