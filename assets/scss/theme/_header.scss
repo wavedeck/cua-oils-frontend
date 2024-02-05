@@ -113,3 +113,21 @@
         }
     }
 }
+
+@media screen and (min-width: 992px) {
+    #main-header {
+        #-pro-menu-4-15 {
+            .oxy-pro-menu-mobile-open-icon, .oxy-pro-menu-mobile-close-icon {
+                display: none;
+            }
+
+            .oxy-pro-menu-container {
+                display: block;
+            }
+
+            .oxy-pro-menu-list {
+                flex-direction: row;
+            }
+        }
+    }
+}
