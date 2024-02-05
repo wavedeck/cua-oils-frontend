@@ -5,6 +5,11 @@ import {OilsRepository} from "~/core/oils/oils.repository";
 const oilsSearch = ref('');
 const selectedLetter = ref('');
 
+const clearFilters = () => {
+  oilsSearch.value = '';
+  selectedLetter.value = '';
+};
+
 const fetchAllOils = () => {
   const service = new OilsService(new OilsRepository());
   return service.getManyOils({allPages: true});
@@ -50,7 +55,7 @@ const getOilsForLetter = (letter: string) => {
         <input id="filter-search" v-model="oilsSearch" name="s" placeholder="Suche nach Ölen..." type="text"/>
       </form>
       <div class="lexikon-filter">
-        <a class="lexikon-filter__item lexikon-filter__reset" href="?filter" @click.prevent="() => selectedLetter = ''">Alle</a>
+        <a class="lexikon-filter__item lexikon-filter__reset" href="?filter" @click.prevent="clearFilters">Alle</a>
         <a v-for="letter in oilLetters" :href="`?filter=${letter}`" class="lexikon-filter__item"
            @click.prevent="() => selectedLetter = letter">{{ letter }}</a>
       </div>
