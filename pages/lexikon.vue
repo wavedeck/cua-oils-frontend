@@ -1,12 +1,13 @@
 <script lang="ts" setup>
-import OilsRepository from "~/core/oils/oils.repository";
+import {OilsService} from "~/core/oils/oils.service";
+import {OilsRepository} from "~/core/oils/oils.repository";
 
 const oilsSearch = ref('');
 const selectedLetter = ref('');
 
 const fetchAllOils = () => {
-  const repository = new OilsRepository();
-  return repository.getManyOils({ allPages: true });
+  const service = new OilsService(new OilsRepository());
+  return service.getManyOils({allPages: true});
 }
 
 const oils = await fetchAllOils();
@@ -50,7 +51,8 @@ const getOilsForLetter = (letter: string) => {
       </form>
       <div class="lexikon-filter">
         <a class="lexikon-filter__item lexikon-filter__reset" href="?filter" @click.prevent="() => selectedLetter = ''">Alle</a>
-        <a v-for="letter in oilLetters" :href="`?filter=${letter}`" class="lexikon-filter__item" @click.prevent="() => selectedLetter = letter">{{ letter }}</a>
+        <a v-for="letter in oilLetters" :href="`?filter=${letter}`" class="lexikon-filter__item"
+           @click.prevent="() => selectedLetter = letter">{{ letter }}</a>
       </div>
       <div class="lexikon-oils-list">
         <div
