@@ -1,72 +1,19 @@
 <script lang="ts" setup>
+import OilsRepository from "~/core/oils/oils.repository";
 
-// Define a type for oil objects
-export interface Oil {
-  id: number;
-  date: string;
-  date_gmt: string;
-  guid: {
-    rendered: string;
-  };
-  modified: string;
-  modified_gmt: string;
-  slug: string;
-  status: string;
-  type: string;
-  link: string;
-  title: {
-    rendered: string;
-  };
-  template: string;
-  acf: {
-    "ol-bild"?: number;
-    beschreibung: string;
-    rezepte?: number[];
-    video?: string;
-    [key: string]: any;
-  };
+const fetchAllOils = () => {
+  const repository = new OilsRepository();
+  return repository.getManyOils({ allPages: true });
 }
-
-const alphabet: string[] = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
-
-// api params
-const apiPerPage = 100; // max per_page value
-
-// fetch total pages count from wordpress rest api
-const fetchTotalPages = async () => {
-  const response = await fetch('https://bms-oils-web.invadox.dev/wp-json/wp/v2/bms_oils?per_page=' + apiPerPage, {
-    method: 'HEAD'
-  });
-  return response.headers.get('X-WP-TotalPages');
-};
-
-// fetch all oils from wordpress rest api
-const fetchAllOils = async (): Promise<Oil[]> => {
-  // setup request params
-  const totalPages = await fetchTotalPages();
-  if(!totalPages) throw new Error('No total pages found');
-  const urlParams = new URLSearchParams({
-    per_page: apiPerPage.toString(),
-    order_by: 'title',
-    order: 'asc'
-  }).toString();
-
-  const requests = Array.from({ length: +totalPages }, (_, i) => {
-    return $fetch<Oil[]>(`https://bms-oils-web.invadox.dev/wp-json/wp/v2/bms_oils?${urlParams}&page=${i+1}`);
-  });
-  const responses = await Promise.all(requests);
-  return responses.flat();
-};
 
 // fetch all oils from wordpress rest api
 const oils = await fetchAllOils();
 
-const availableLetters = oils.map((oil: Oil) => oil.title.rendered.charAt(0).toUpperCase());
+const availableLetters = oils.map(oil => oil.title.rendered.charAt(0).toUpperCase());
 const oilLetters = Array.from(new Set(availableLetters)).sort();
 
-const getOilsForLetter = (letter: string): Oil[] => {
+const getOilsForLetter = (letter: string) => {
   return oils.filter(oil => oil.title.rendered.charAt(0).toUpperCase() === letter);
-  // return oils.sort(); // not necessary with api since it's already sorted
 };
 
 </script>
