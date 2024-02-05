@@ -35,7 +35,7 @@
                   href="/"
                   class="menu-item-link"
                 >
-                  Start
+                  Rezepte
                 </a>
               </li>
               <li class="menu-item">
@@ -43,7 +43,7 @@
                     href="/lexikon"
                     class="menu-item-link"
                 >
-                  Öle Lexikon
+                  Lexikon
                 </a>
               </li>
               <li class="menu-item">
