@@ -1,19 +1,41 @@
 <script lang="ts" setup>
 import OilsRepository from "~/core/oils/oils.repository";
 
+const oilsSearch = ref('');
+const selectedLetter = ref('');
+
 const fetchAllOils = () => {
   const repository = new OilsRepository();
   return repository.getManyOils({ allPages: true });
 }
 
-// fetch all oils from wordpress rest api
 const oils = await fetchAllOils();
 
-const availableLetters = oils.map(oil => oil.title.rendered.charAt(0).toUpperCase());
-const oilLetters = Array.from(new Set(availableLetters)).sort();
+const filteredOils = computed(() => {
+  let items = oils;
+
+  if (oilsSearch.value) {
+    items = items.filter(oil =>
+        oil.title.rendered.toLowerCase().includes(oilsSearch.value.toLowerCase())
+    );
+  }
+
+  if (selectedLetter.value) {
+    items = items.filter(oil =>
+        oil.title.rendered.charAt(0).toUpperCase() === selectedLetter.value
+    );
+  }
+
+  return items;
+});
+
+const oilLetters = computed(() => {
+  const availableLetters = filteredOils.value.map(oil => oil.title.rendered.charAt(0).toUpperCase());
+  return Array.from(new Set(availableLetters)).sort();
+});
 
 const getOilsForLetter = (letter: string) => {
-  return oils.filter(oil => oil.title.rendered.charAt(0).toUpperCase() === letter);
+  return filteredOils.value.filter(oil => oil.title.rendered.charAt(0).toUpperCase() === letter);
 };
 
 </script>
@@ -24,11 +46,11 @@ const getOilsForLetter = (letter: string) => {
     <div class="container mx-auto py-8">
       <form action="">
         <label class="sr-only" for="filter-search">Suche</label>
-        <input id="filter-search" name="s" placeholder="Suche nach Ölen..." type="text"/>
+        <input id="filter-search" v-model="oilsSearch" name="s" placeholder="Suche nach Ölen..." type="text"/>
       </form>
       <div class="lexikon-filter">
-        <a href="?filter" class="lexikon-filter__item lexikon-filter__reset">Alle</a>
-        <a v-for="letter in oilLetters" :href="`?filter=${letter}`" class="lexikon-filter__item">{{ letter }}</a>
+        <a class="lexikon-filter__item lexikon-filter__reset" href="?filter" @click.prevent="() => selectedLetter = ''">Alle</a>
+        <a v-for="letter in oilLetters" :href="`?filter=${letter}`" class="lexikon-filter__item" @click.prevent="() => selectedLetter = letter">{{ letter }}</a>
       </div>
       <div class="lexikon-oils-list">
         <div
