@@ -24,6 +24,11 @@ const {data: oil, error} = useAsyncData(() => fetchOilContent());
 const openImageInNewTab = (url: string) => {
   window.open(url, '_blank');
 };
+
+const nl2br = (str: string): string => {
+  return str.replace(/\r\n|\n|\r/g, '<br>' + '\n');
+}
+
 </script>
 
 <template>
@@ -49,7 +54,7 @@ const openImageInNewTab = (url: string) => {
       </div>
       <div
           class="topic-content__content"
-          v-html="oil.acf.beschreibung"
+          v-html="nl2br(oil.acf.beschreibung)"
       ></div>
     </div>
   </section>
@@ -66,7 +71,7 @@ const openImageInNewTab = (url: string) => {
       </div>
     </div>
   </section>
-    {{ error }}
+  {{ error }}
 </template>
 
 <style scoped>
