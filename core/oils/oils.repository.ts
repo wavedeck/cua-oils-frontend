@@ -72,7 +72,8 @@ export class OilsRepository implements IOilsRepository{
 
     private async _fetchOilBy(query: OilResponseQuery): Promise<OilResponse> {
         const queryParams = this._constructQueryParams(query);
-        return $fetch(this._baseUrl + "?" + queryParams);
+        const oils = await $fetch<OilResponse[]>(this._baseUrl + "?" + queryParams);
+        return oils[0];
     }
 
     private _constructQueryParams(params?: object): string {
