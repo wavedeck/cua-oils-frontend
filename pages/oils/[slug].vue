@@ -139,6 +139,7 @@ const nl2br = (str: string): string => {
 
   .topic-content__content {
     width: 60%;
+    padding-right: 10rem;
   }
 
   .topic-gallery__wrapper {
