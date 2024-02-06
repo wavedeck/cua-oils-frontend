@@ -32,6 +32,12 @@ const openImageInNewTab = (url: string) => {
       subtitle="Lexikon"
       title="BMS OILS ACADEMY"
   />
+  <section v-if="oil" class="topic-actions">
+    <div class="container mx-auto">
+      <h2 class="topic__title">{{ oil.title.rendered }}</h2>
+      <a class="topic__backbutton" href="/lexikon">&laquo; Zurück zum Lexikon</a>
+    </div>
+  </section>
   <section v-if="oil" class="topic-content">
     <div class="container mx-auto">
       <div class="topic-content__image__wrapper">
@@ -64,6 +70,7 @@ const openImageInNewTab = (url: string) => {
 </template>
 
 <style scoped>
+.topic-actions,
 .topic-content,
 .topic-gallery {
   padding: 2rem 0;
@@ -79,6 +86,12 @@ const openImageInNewTab = (url: string) => {
 .topic-content__image {
   max-width: 8rem;
   rotate: 15deg;
+}
+
+.topic-actions .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .topic-content .container {
@@ -98,6 +111,7 @@ const openImageInNewTab = (url: string) => {
   .topic-content {
     padding: 6rem 0;
   }
+
   .topic-content .container {
     flex-direction: row;
   }
@@ -118,6 +132,18 @@ const openImageInNewTab = (url: string) => {
 @media screen and (min-width: 992px) {
   .topic-gallery__wrapper {
     grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .topic-actions .topic__title {
+    width: 40%;
+    font-size: 2.5rem;
+  }
+
+  .topic-actions .topic__backbutton {
+    width: 60%;
+    text-align: right;
+    color: #2b4675;
+    text-decoration: none;
   }
 }
 

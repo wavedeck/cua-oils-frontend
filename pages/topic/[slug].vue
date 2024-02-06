@@ -4,6 +4,12 @@
       :title="topic?.title.rendered"
       subtitle="BMS OILS ACADEMY"
   />
+  <section class="topic-actions">
+    <div class="container mx-auto">
+      <h2 class="topic__title">{{ topic?.title.rendered }}</h2>
+      <a class="topic__backbutton" href="/">&laquo; Zurück zu den Rezeptkategorien</a>
+    </div>
+  </section>
   <section v-if="topic" class="topic-content">
     <div class="container mx-auto">
       <img
@@ -95,9 +101,21 @@ const openImageInNewTab = (url: string) => {
 </script>
 
 <style scoped>
+.topic-actions,
 .topic-content,
 .topic-gallery {
   padding: 2rem 0;
+}
+
+.topic-actions .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.topic-actions .topic__backbutton {
+  color: #304B79;
+  text-decoration: none;
 }
 
 .topic-content__image {
