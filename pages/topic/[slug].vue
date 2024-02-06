@@ -6,7 +6,7 @@
   />
   <section class="topic-actions">
     <div class="container mx-auto">
-      <h2 class="topic__title">{{ topic?.title.rendered }}</h2>
+      <h2 class="topic__title" v-html="topic?.title.rendered"/>
       <a class="topic__backbutton" href="/">&laquo; Zurück zu den Rezeptkategorien</a>
     </div>
   </section>
