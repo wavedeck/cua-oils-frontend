@@ -108,6 +108,7 @@ const nl2br = (str: string): string => {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding-bottom: 1rem;
 }
 
 .topic-content .container {
@@ -153,6 +154,7 @@ const nl2br = (str: string): string => {
   .topic-actions .topic__title {
     width: 40%;
     font-size: 2.5rem;
+    margin: 0;
   }
 
   .topic-actions .topic__backbutton {
@@ -167,6 +169,10 @@ const nl2br = (str: string): string => {
   .topic-gallery__wrapper {
     grid-template-columns: 1fr 1fr 1fr 1fr;
   }
+}
+
+.topic-actions .container {
+  border-bottom: 4px solid #DBB03D;
 }
 
 </style>
