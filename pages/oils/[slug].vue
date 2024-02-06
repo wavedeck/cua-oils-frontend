@@ -1,20 +1,31 @@
 <script lang="ts" setup>
-import type {Oil} from "~/pages/lexikon.vue";
 import MediaService from "~/core/media/media.service";
+import {OilsService} from "~/core/oils/oils.service";
+import {OilsRepository} from "~/core/oils/oils.repository";
 
 const route = useRoute();
 const {slug} = route.params;
 
 const fetchOilContent = async () => {
-  const response = await $fetch<Oil[]>(
-      `https://bms-oils-web.invadox.dev/wp-json/wp/v2/bms_oils?slug=${slug}`
-  );
-  const oil = response[0];
+  const oilsRepository = new OilsRepository();
+  const oilsService = new OilsService(oilsRepository);
+
+  const oil = await oilsService.getOilBySlug(slug as string);
 
   const mediaService = new MediaService();
-  const media = await mediaService.getManyMedia([oil.acf["ol-bild"], ...oil.acf.rezepte]);
+  const mediaIds: number[] = [];
+
+  if (oil.acf["ol-bild"]) {
+    mediaIds.push(oil.acf["ol-bild"]);
+  }
+
+  if (oil.acf.rezepte) {
+    mediaIds.push(...oil.acf.rezepte);
+  }
+
+  const media = await mediaService.getManyMedia(mediaIds);
   oil.acf.postImage = media.find(media => media.id === oil.acf["ol-bild"]);
-  oil.acf.galleryImages = oil.acf.rezepte.map((id: number) => media.find(media => media.id === id));
+  oil.acf.galleryImages = oil.acf.rezepte?.map((id: number) => media.find(media => media.id === id));
 
   return oil;
 }
