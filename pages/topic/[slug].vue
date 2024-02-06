@@ -19,7 +19,7 @@
       />
       <div
           class="topic-content__content"
-          v-html="topic.acf['post-content']"
+          v-html="nl2br(topic.acf['post-content']!)"
       ></div>
     </div>
   </section>
@@ -96,6 +96,10 @@ const {data: topic, error, pending} = useAsyncData(
 
 const openImageInNewTab = (url: string) => {
   window.open(url, '_blank');
+}
+
+const nl2br = (str: string): string => {
+  return str.replace(/\r\n|\n|\r/g, '<br>' + '\n');
 }
 
 </script>
