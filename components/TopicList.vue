@@ -7,12 +7,14 @@
             :key="topic.id"
             class="overview-topic-list__topic"
         >
-          <a :href="`/topic/${topic.slug}`" class="topic__linkwrapper"
+          <NuxtLink
+            :to="`/topic/${topic.slug}`"
+            class="topic__linkwrapper"
           ><img
               :alt="topic.__title"
               :src="topic.__previewImage"
               class="topic__image"
-          /></a>
+          /></NuxtLink>
         </div>
         {{ error }}
       </div>

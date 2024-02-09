@@ -1,7 +1,7 @@
 <template>
   <header id="main-header">
     <div class="container main-header__container mx-auto">
-      <a id="main-header__logo" href="/">
+      <NuxtLink id="main-header__logo" to="/">
         <img
           id="image-3-15"
           alt=""
@@ -10,7 +10,7 @@
           src="/img/theme/flower_white.svg"
         />
         <div id="text_block-7-15">BMS Oils Academy</div>
-      </a>
+      </NuxtLink>
 
       <div id="-pro-menu-4-15" class="oxy-pro-menu">
         <div class="oxy-pro-menu-mobile-open-icon" @click="toggleMenu">
@@ -31,20 +31,14 @@
           <div class="menu-header-container">
             <ul id="menu-header" class="oxy-pro-menu-list">
               <li class="menu-item">
-                <a
-                  href="/"
-                  class="menu-item-link"
-                >
+                <NuxtLink to="/" class="menu-item-link">
                   Rezepte
-                </a>
+                </NuxtLink>
               </li>
               <li class="menu-item">
-                <a
-                    href="/lexikon"
-                    class="menu-item-link"
-                >
+                <NuxtLink to="/lexikon" class="menu-item-link">
                   Lexikon
-                </a>
+                </NuxtLink>
               </li>
               <li class="menu-item">
                 <a

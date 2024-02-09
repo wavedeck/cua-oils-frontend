@@ -1,35 +1,40 @@
 <template>
-  <PageHero
-      :backgroundImage="topic?.acf.postHeaderUrl"
-      :title="topic?.title.rendered"
-      subtitle="BMS OILS ACADEMY"
-  />
-  <section class="topic-actions">
-    <div class="container mx-auto">
-      <a class="topic__backbutton" href="/">&laquo; Zurück zu den Rezeptkategorien</a>
-    </div>
-  </section>
-  <section v-if="topic" class="topic-content">
-    <div class="container mx-auto">
-      <div
-          class="topic-content__content"
-          v-html="nl2br(topic.acf['post-content']!)"
-      ></div>
-    </div>
-  </section>
-  <section v-if="topic?.acf.postGalleryUrls" class="topic-gallery">
-    <div class="container mx-auto">
-      <div class="topic-gallery__wrapper">
-      <img
-          v-for="imageUrl in topic.acf.postGalleryUrls"
-          :key="imageUrl.id"
-          :src="imageUrl.src"
-          @click="openImageInNewTab(imageUrl.src)"
-          alt=""
-      />
+  <template v-if="!pending">
+    <PageHero
+        :backgroundImage="topic?.acf.postHeaderUrl"
+        :title="topic?.title.rendered"
+        subtitle="BMS OILS ACADEMY"
+    />
+    <section class="topic-actions">
+      <div class="container mx-auto">
+        <NuxtLink class="topic__backbutton" to="/">
+          &laquo; Zurück zu den Rezeptkategorien
+        </NuxtLink>
       </div>
-    </div>
-  </section>
+    </section>
+    <section v-if="topic" class="topic-content">
+      <div class="container mx-auto">
+        <div
+            class="topic-content__content"
+            v-html="nl2br(topic.acf['post-content']!)"
+        ></div>
+      </div>
+    </section>
+    <section v-if="topic?.acf.postGalleryUrls" class="topic-gallery">
+      <div class="container mx-auto">
+        <div class="topic-gallery__wrapper">
+          <img
+              v-for="imageUrl in topic.acf.postGalleryUrls"
+              :key="imageUrl.id"
+              :src="imageUrl.src"
+              @click="openImageInNewTab(imageUrl.src)"
+              alt=""
+          />
+        </div>
+      </div>
+    </section>
+  </template>
+  <NuxtLoadingIndicator v-else />
   {{ error }}
 </template>
 

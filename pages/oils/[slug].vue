@@ -51,7 +51,9 @@ const nl2br = (str: string): string => {
   <section v-if="oil" class="topic-actions">
     <div class="container mx-auto">
       <h2 class="topic__title">{{ oil.title.rendered }}</h2>
-      <a class="topic__backbutton" href="/lexikon">&laquo; Zurück zum Lexikon</a>
+      <NuxtLink class="topic__backbutton" to="/lexikon">
+        &laquo; Zurück zum Lexikon
+      </NuxtLink>
     </div>
   </section>
   <section v-if="oil" class="topic-content">
