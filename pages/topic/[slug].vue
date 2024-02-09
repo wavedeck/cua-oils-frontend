@@ -6,17 +6,11 @@
   />
   <section class="topic-actions">
     <div class="container mx-auto">
-      <h2 class="topic__title" v-html="topic?.title.rendered"/>
       <a class="topic__backbutton" href="/">&laquo; Zurück zu den Rezeptkategorien</a>
     </div>
   </section>
   <section v-if="topic" class="topic-content">
     <div class="container mx-auto">
-      <img
-          :src="topic.acf.postImageUrl"
-          alt=""
-          class="topic-content__image"
-      />
       <div
           class="topic-content__content"
           v-html="nl2br(topic.acf['post-content']!)"
@@ -122,11 +116,6 @@ const nl2br = (str: string): string => {
   text-decoration: none;
 }
 
-.topic-content__image {
-  width: 100%;
-  height: auto;
-}
-
 .topic-content .container {
   display: flex;
   flex-direction: column;
@@ -148,12 +137,9 @@ const nl2br = (str: string): string => {
     flex-direction: row;
   }
 
-  .topic-content__image {
-    width: 40%;
-  }
-
   .topic-content__content {
     width: 60%;
+    margin: 0 auto;
   }
 
   .topic-gallery__wrapper {
