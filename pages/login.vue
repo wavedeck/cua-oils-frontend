@@ -50,7 +50,8 @@ const signInWithPassword = async () => {
           Gib deine E-Mail und Passwort ein, um auf die Academy zuzugreifen.
         </p>
 
-        <div class="login-form">
+        <form class="login-form" @submit.prevent="signInWithPassword">
+
           <div class="login-form__inputs">
             <div class="login-form__inputwrapper">
               <label for="login_email">E-Mail</label>
@@ -85,7 +86,7 @@ const signInWithPassword = async () => {
           >
             Einloggen
           </button>
-        </div>
+        </form>
       </div>
 
       <div class="login-footer">
