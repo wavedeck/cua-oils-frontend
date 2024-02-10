@@ -1,4 +1,4 @@
 export const apiConfig = {
-    basePath: "https://bms-oils-web.invadox.dev/wp-json",
-    baseUrl: "https://bms-oils-web.invadox.dev/wp-json",
+    basePath: "https://www.bms-oils.com/wp-json",
+    baseUrl: "https://www.bms-oils.com/wp-json",
 }

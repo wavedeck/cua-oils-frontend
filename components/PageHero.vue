@@ -28,7 +28,7 @@ defineProps({
     type: String,
     required: false,
     default:
-        "https://bms-oils-web.invadox.dev/wp-content/uploads/2023/12/IMG_6275-70.webp",
+        "https://www.bms-oils.com/wp-content/uploads/2023/12/IMG_6275-70.webp",
   },
 });
 </script>

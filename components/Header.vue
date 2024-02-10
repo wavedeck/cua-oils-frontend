@@ -42,7 +42,7 @@
               </li>
               <li class="menu-item">
                 <a
-                    href="https://bms-oils-web.invadox.dev/"
+                    href="https://www.bms-oils.com"
                     class="menu-item-link"
                 >
                   &laquo; Zurück zur Website

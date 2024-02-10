@@ -29,7 +29,7 @@ const signInWithPassword = async () => {
     <div class="login-image-wrapper">
       <img
         alt=""
-        src="https://bms-oils-web.invadox.dev/wp-content/uploads/2024/01/Einstiegskurs_header.webp"
+        src="https://www.bms-oils.com/wp-content/uploads/2024/01/Einstiegskurs_header.webp"
       />
     </div>
 
@@ -92,7 +92,7 @@ const signInWithPassword = async () => {
       <div class="login-footer">
         <p class="login__signup-text">
           Noch kein Konto?
-          <a href="https://bms-oils-web.invadox.dev/bms-academy-info/"
+          <a href="https://www.bms-oils.com/bms-academy-info/"
             >Anfragen</a
           >
         </p>
