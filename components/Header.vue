@@ -31,12 +31,12 @@
           <div class="menu-header-container">
             <ul id="menu-header" class="oxy-pro-menu-list">
               <li class="menu-item">
-                <NuxtLink to="/" class="menu-item-link">
+                <NuxtLink to="/" class="menu-item-link" @click.native="toggleMenu">
                   Rezepte
                 </NuxtLink>
               </li>
               <li class="menu-item">
-                <NuxtLink to="/lexikon" class="menu-item-link">
+                <NuxtLink to="/lexikon" class="menu-item-link" @click.native="toggleMenu">
                   Lexikon
                 </NuxtLink>
               </li>
