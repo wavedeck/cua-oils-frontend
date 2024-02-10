@@ -1,6 +1,7 @@
 <template>
   <MainHeader />
   <slot />
+  <MainFooter />
 </template>
 
 <style lang="scss">
