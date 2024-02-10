@@ -27,24 +27,28 @@
           </svg>
         </div>
 
-        <div class="oxy-pro-menu-container" :class="{'oxy-pro-menu-container-open': isMenuOpen}">
+        <div
+          class="oxy-pro-menu-container"
+          :class="{ 'oxy-pro-menu-container-open': isMenuOpen }"
+        >
           <div class="menu-header-container">
             <ul id="menu-header" class="oxy-pro-menu-list">
               <li class="menu-item">
-                <NuxtLink to="/" class="menu-item-link" @click.native="toggleMenu">
+                <NuxtLink to="/" class="menu-item-link" @click="toggleMenu">
                   Rezepte
                 </NuxtLink>
               </li>
               <li class="menu-item">
-                <NuxtLink to="/lexikon" class="menu-item-link" @click.native="toggleMenu">
+                <NuxtLink
+                  to="/lexikon"
+                  class="menu-item-link"
+                  @click="toggleMenu"
+                >
                   Lexikon
                 </NuxtLink>
               </li>
               <li class="menu-item">
-                <a
-                    href="https://www.bms-oils.com"
-                    class="menu-item-link"
-                >
+                <a href="https://www.bms-oils.com" class="menu-item-link">
                   &laquo; Zurück zur Website
                 </a>
               </li>

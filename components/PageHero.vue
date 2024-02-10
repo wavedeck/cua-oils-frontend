@@ -1,10 +1,14 @@
 <template>
   <section
-      class="page-hero"
-      :style="{ '--background-image': `url(${backgroundImage})` }"
+    class="page-hero"
+    :style="{ '--background-image': `url(${backgroundImage})` }"
   >
     <div class="container mx-auto page-hero__container">
-      <img :alt="title" src="/img/theme/flower_main.svg" class="page-hero__icon"/>
+      <img
+        :alt="title"
+        src="/img/theme/flower_main.svg"
+        class="page-hero__icon"
+      />
       <div class="page-hero__content">
         <h1 class="page-hero__title" v-html="title"></h1>
         <h2 class="page-hero__subtitle">{{ subtitle }}</h2>
@@ -28,7 +32,7 @@ defineProps({
     type: String,
     required: false,
     default:
-        "https://www.bms-oils.com/wp-content/uploads/2023/12/doterra-balance-flower-basket.webp",
+      "https://www.bms-oils.com/wp-content/uploads/2023/12/doterra-balance-flower-basket.webp",
   },
 });
 </script>
