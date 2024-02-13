@@ -1,9 +1,9 @@
 <template>
   <template v-if="!pending">
     <PageHero
-        :backgroundImage="topic?.acf.postHeaderUrl"
-        :title="topic?.title.rendered"
-        subtitle="BMS OILS ACADEMY"
+      :background-image="topic?.acf.postHeaderUrl"
+      :title="topic?.title.rendered"
+      subtitle="BMS OILS ACADEMY"
     />
     <section class="topic-actions">
       <div class="container mx-auto">
@@ -15,38 +15,62 @@
     <section v-if="topic" class="topic-content">
       <div class="container mx-auto">
         <div
-            class="topic-content__content"
-            v-html="nl2br(topic.acf['post-content']!)"
+          class="topic-content__content"
+          v-html="nl2br(topic.acf['post-content']!)"
         ></div>
       </div>
     </section>
     <section v-if="topic?.acf.postGalleryUrls" class="topic-gallery">
       <div class="container mx-auto">
-        <div class="topic-gallery__wrapper">
-          <img
-              v-for="imageUrl in topic.acf.postGalleryUrls"
-              :key="imageUrl.id"
-              :src="imageUrl.src"
-              @click="openImageInNewTab(imageUrl.src)"
-              alt=""
-          />
+        <div id="topic-gallery" class="topic-gallery__wrapper">
+          <a
+            v-for="image in topic.acf.postGalleryUrls"
+            :key="image.id"
+            :href="image.src"
+            data-pswp-width="1080"
+            data-pswp-height="1080"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <img :src="image.src" alt="" />
+          </a>
         </div>
       </div>
     </section>
   </template>
-  <NuxtLoadingIndicator v-else />
   {{ error }}
 </template>
 
 <script lang="ts" setup>
-import {useRoute} from "vue-router";
-import {useAsyncData} from "nuxt/app";
+import { useRoute } from "vue-router";
+import { useAsyncData } from "nuxt/app";
+import PhotoSwipeLightbox from "photoswipe/lightbox";
+import PhotoSwipeModule from "photoswipe";
 import TopicsService from "~/core/topics/topics.service";
 import MediaService from "~/core/media/media.service";
-import type {MediaResponse} from "~/core/media/media.repository";
+import type { MediaResponse } from "~/core/media/media.repository";
 
+import "photoswipe/style.css";
+
+const lightbox = ref<PhotoSwipeLightbox | null>(null);
 const route = useRoute();
-const {slug} = route.params;
+const { slug } = route.params;
+
+const initPhotoSwipe = () => {
+  if (lightbox.value) {
+    lightbox.value.destroy();
+  }
+
+  nextTick(() => {
+    lightbox.value = new PhotoSwipeLightbox({
+      gallery: "#topic-gallery",
+      children: "a",
+      pswpModule: PhotoSwipeModule,
+    });
+
+    lightbox.value.init();
+  });
+};
 
 const getTopicBySlug = async (slug: string) => {
   const topicsService = new TopicsService();
@@ -74,33 +98,51 @@ const getTopicBySlug = async (slug: string) => {
     if (!media) return null;
 
     return Object.keys(media.media_details.sizes).length === 0
-        ? media.source_url
-        : media.media_details.sizes['full']
-            ? media.media_details.sizes['full'].source_url
-            : null;
+      ? media.source_url
+      : media.media_details.sizes["full"]
+        ? media.media_details.sizes["full"].source_url
+        : null;
   };
 
-  topicPojo.acf.postHeaderUrl = getUrl(mediaData.find(media => media.id === topic.getPostHeaderId()));
-  topicPojo.acf.postImageUrl = getUrl(mediaData.find(media => media.id === topic.getPostImageId()));
-  topicPojo.acf.postGalleryUrls = mediaData.filter(media => topic.getPostGalleryIds()?.includes(media.id))
-      .map(media => ({id: media.id, src: getUrl(media)}));
+  topicPojo.acf.postHeaderUrl = getUrl(
+    mediaData.find((media) => media.id === topic.getPostHeaderId()),
+  );
+  topicPojo.acf.postImageUrl = getUrl(
+    mediaData.find((media) => media.id === topic.getPostImageId()),
+  );
+  topicPojo.acf.postGalleryUrls = mediaData
+    .filter((media) => topic.getPostGalleryIds()?.includes(media.id))
+    .map((media) => ({ id: media.id, src: getUrl(media) }));
 
   return topicPojo;
 };
 
-
-const {data: topic, error, pending} = useAsyncData(
-    () => getTopicBySlug(slug as string),
-);
-
-const openImageInNewTab = (url: string) => {
-  window.open(url, '_blank');
-}
+const {
+  data: topic,
+  error,
+  pending,
+} = useAsyncData(() => getTopicBySlug(slug as string));
 
 const nl2br = (str: string): string => {
-  return str.replace(/\r\n|\n|\r/g, '<br>' + '\n');
-}
+  return str.replace(/\r\n|\n|\r/g, "<br>" + "\n");
+};
 
+onMounted(() => {
+  initPhotoSwipe();
+});
+
+onBeforeUnmount(() => {
+  if (lightbox.value) {
+    lightbox.value.destroy();
+    lightbox.value = null;
+  }
+});
+
+watch(pending, () => {
+  if (!pending.value) {
+    initPhotoSwipe();
+  }
+});
 </script>
 
 <style scoped>
@@ -117,7 +159,7 @@ const nl2br = (str: string): string => {
 }
 
 .topic-actions .topic__backbutton {
-  color: #304B79;
+  color: #304b79;
   text-decoration: none;
 }
 
@@ -163,5 +205,4 @@ const nl2br = (str: string): string => {
     grid-template-columns: 1fr 1fr 1fr 1fr;
   }
 }
-
 </style>
