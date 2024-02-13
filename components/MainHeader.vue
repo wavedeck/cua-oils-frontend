@@ -70,5 +70,23 @@
 
 <script setup lang="ts">
 const isMenuOpen = ref(false);
-const toggleMenu = () => (isMenuOpen.value = !isMenuOpen.value);
+const isMobile = ref(false);
+
+onMounted(() => {
+  isMobile.value = window.innerWidth < 992;
+});
+
+onBeforeMount(() => {
+  window.addEventListener("resize", () => {
+    isMobile.value = window.innerWidth < 992;
+  });
+});
+
+const toggleMenu = () => {
+  if (isMobile.value) {
+    isMenuOpen.value = !isMenuOpen.value;
+  } else {
+    isMenuOpen.value = false;
+  }
+};
 </script>
