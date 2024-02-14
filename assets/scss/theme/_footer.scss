@@ -72,3 +72,45 @@
     }
   }
 }
+
+@media screen and (min-width: 992px) {
+  #main-footer {
+
+    .footer-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-brand {
+      width: 40%;
+
+      .footer-brand__logowrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .footer-brand__social {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+      }
+    }
+
+    .footer-navigation {
+      margin-top: 0;
+      width: 60%;
+
+      .footer-navigation__list {
+        align-items: flex-end;
+      }
+    }
+
+    .footer-legal {
+      width: 100%;
+      margin-top: 6rem;
+    }
+  }
+}
