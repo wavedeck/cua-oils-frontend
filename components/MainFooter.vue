@@ -103,24 +103,6 @@
           >
             Datenschutz
           </a>
-          |
-          <a href="https://corinnaundandreas.com/agb/" style="color: white">
-            AGB
-          </a>
-          |
-          <a
-            href="https://corinnaundandreas.com/rueckgaberecht/"
-            style="color: white"
-          >
-            Rückgaberecht
-          </a>
-          |
-          <a
-            href="https://corinnaundandreas.com/lieferbedingungen/"
-            style="color: white"
-          >
-            Lieferbedingungen
-          </a>
         </div>
         <div class="footer-legal__copyright">
           Copyright © Lebensfeuer Ltd, 2024
