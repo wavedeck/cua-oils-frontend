@@ -9,7 +9,7 @@ watch(
   user,
   () => {
     if (user.value) {
-      return navigateTo("/lexikon");
+      return navigateTo("/");
     }
   },
   { immediate: true },
