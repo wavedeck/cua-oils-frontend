@@ -92,7 +92,7 @@ const signInWithPassword = async () => {
       <div class="login-footer">
         <p class="login__signup-text">
           Noch kein Konto?
-          <a href="https://www.bms-oils.com/bms-academy-info/"
+          <a href="https://www.bms-oils.com/registrierung/"
             >Anfragen</a
           >
         </p>
