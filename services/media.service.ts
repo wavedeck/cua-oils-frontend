@@ -17,7 +17,7 @@ export class MediaService {
   public async getMedia(mediaIds: number[] | number): Promise<MediaResponse[]>;
 
   public async getMedia(
-    mediaIds?: number[] | number
+    mediaIds?: number[] | number,
   ): Promise<MediaResponse[]> {
     if (mediaIds === undefined) {
       return this._fetchMedia(this.mediaIds);
@@ -31,10 +31,12 @@ export class MediaService {
   }
 
   private async _fetchMedia(mediaIds: number[]): Promise<MediaResponse[]> {
-    let queryString = this._createQueryString({ include: mediaIds.join(",") });
+    const queryString = this._createQueryString({
+      include: mediaIds.join(","),
+    });
     const mediaApiUrl = apiConfig.basePath + "/wp/v2/media?" + queryString;
 
-    let mediaResponse = await fetch(mediaApiUrl);
+    const mediaResponse = await fetch(mediaApiUrl);
     return await mediaResponse.json();
   }
 

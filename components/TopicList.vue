@@ -3,14 +3,12 @@
     <div class="container mx-auto">
       <div class="overview-topic-list__wrapper">
         <div
-            v-for="topic in data?.topics"
-            :key="topic.id"
-            class="overview-topic-list__topic"
+          v-for="topic in data?.topics"
+          :key="topic.id"
+          class="overview-topic-list__topic"
         >
-          <NuxtLink
-            :to="`/topic/${topic.slug}`"
-            class="topic__linkwrapper"
-          ><img
+          <NuxtLink :to="`/topic/${topic.slug}`" class="topic__linkwrapper"
+            ><img
               :alt="topic.__title"
               :src="topic.__previewImage"
               class="topic__image"
@@ -23,9 +21,9 @@
 </template>
 
 <script lang="ts" setup>
-import {useAsyncData} from "nuxt/app";
-import {TopicsService} from "~/core/topics/topics.service";
-import {MediaService} from "~/core/media/media.service";
+import { useAsyncData } from "nuxt/app";
+import { TopicsService } from "~/core/topics/topics.service";
+import { MediaService } from "~/core/media/media.service";
 
 const getTopics = async () => {
   const topicsService = new TopicsService();
@@ -34,19 +32,19 @@ const getTopics = async () => {
   const topics = await topicsService.getManyTopics();
 
   const mediaIds: number[] = topics
-      .map(topic => topic.getPreviewImageId())
-      .filter((id): id is number => id !== null);
+    .map((topic) => topic.getPreviewImageId())
+    .filter((id): id is number => id !== null);
 
   const mediaData = await mediaService.getManyMedia(mediaIds);
-  const mediaMap = new Map(mediaData.map(media => [media.id, media]));
+  const mediaMap = new Map(mediaData.map((media) => [media.id, media]));
 
   // We need to convert the topics to plain objects, because the
   // Topic class is not serializable by nuxt. We can abuse this
   // to enrich them with additional data.
-  const topicsPojo = topics.map(topic => {
+  const topicsPojo = topics.map((topic) => {
     const previewImageId = topic.getPreviewImageId();
     const media = previewImageId ? mediaMap.get(previewImageId) : null;
-    const mediaUrl = media ? media.media_details.sizes['full'].source_url : '';
+    const mediaUrl = media ? media.media_details.sizes["full"].source_url : "";
     return {
       ...topic.getData(),
       __title: topic.getTitle(),
@@ -58,14 +56,12 @@ const getTopics = async () => {
     topics: topicsPojo,
     media: mediaData,
   };
-}
+};
 
-const {data, error} = await useAsyncData('topics-list', getTopics)
-
+const { data, error } = await useAsyncData("topics-list", getTopics);
 </script>
 
 <style scoped>
-
 .overview-topic-list__wrapper {
   display: grid;
   grid-template-columns: 1fr;
@@ -98,5 +94,4 @@ const {data, error} = await useAsyncData('topics-list', getTopics)
     grid-template-columns: 1fr 1fr 1fr 1fr;
   }
 }
-
 </style>

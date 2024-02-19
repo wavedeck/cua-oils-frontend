@@ -17,10 +17,12 @@
     </section>
     <section v-if="topic" class="topic-content">
       <div class="container mx-auto">
+        <!-- eslint-disable vue/no-v-html -->
         <div
           class="topic-content__content"
           v-html="nl2br(topic.acf['post-content']!)"
         ></div>
+        <!-- eslint-enable vue/no-vhtml -->
       </div>
     </section>
     <section v-if="topic?.acf.postGalleryUrls" class="topic-gallery">

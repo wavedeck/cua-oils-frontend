@@ -54,7 +54,6 @@ const signInWithPassword = async () => {
         </p>
 
         <form class="login-form" @submit.prevent="signInWithPassword">
-
           <div class="login-form__inputs">
             <div class="login-form__inputwrapper">
               <label for="login_email">E-Mail</label>
@@ -95,9 +94,7 @@ const signInWithPassword = async () => {
       <div class="login-footer">
         <p class="login__signup-text">
           Noch kein Konto?
-          <a href="https://www.bms-oils.com/registrierung/"
-            >Anfragen</a
-          >
+          <a href="https://www.bms-oils.com/registrierung/">Anfragen</a>
         </p>
       </div>
     </div>

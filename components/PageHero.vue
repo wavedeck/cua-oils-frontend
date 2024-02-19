@@ -10,6 +10,7 @@
         class="page-hero__icon"
       />
       <div class="page-hero__content">
+        <!-- eslint-disable-next-line vue/no-v-html -->
         <h1 class="page-hero__title" v-html="title"></h1>
         <h2 class="page-hero__subtitle">{{ subtitle }}</h2>
       </div>

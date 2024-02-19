@@ -33,7 +33,6 @@
 </template>
 
 <style scoped>
-
 #section-6-485 .container {
   padding: 2rem 1rem;
 }

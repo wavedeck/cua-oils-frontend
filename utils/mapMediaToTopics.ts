@@ -3,7 +3,7 @@ import { type MediaResponse } from "~/services/media.service";
 
 export const mapMediaToTopics = (
   topics: TopicResponse[],
-  mediaData: MediaResponse[]
+  mediaData: MediaResponse[],
 ) => {
   const mediaMap = new Map(mediaData.map((media) => [media.id, media]));
 
@@ -35,7 +35,7 @@ export const mapMediaToTopics = (
           if (imageObject) {
             return imageObject;
           }
-        }
+        },
       );
     }
     return topic;

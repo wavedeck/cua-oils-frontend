@@ -6,5 +6,5 @@ module.exports = {
   extends: ["@nuxt/eslint-config", "plugin:prettier/recommended"],
   rules: {
     "vue/no-multiple-template-root": "off",
-  }
+  },
 };

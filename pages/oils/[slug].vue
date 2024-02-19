@@ -1,10 +1,10 @@
 <script lang="ts" setup>
 import MediaService from "~/core/media/media.service";
-import {OilsService} from "~/core/oils/oils.service";
-import {OilsRepository} from "~/core/oils/oils.repository";
+import { OilsService } from "~/core/oils/oils.service";
+import { OilsRepository } from "~/core/oils/oils.repository";
 
 const route = useRoute();
-const {slug} = route.params;
+const { slug } = route.params;
 
 const fetchOilContent = async () => {
   const oilsRepository = new OilsRepository();
@@ -24,22 +24,23 @@ const fetchOilContent = async () => {
   }
 
   const media = await mediaService.getManyMedia(mediaIds);
-  oil.acf.postImage = media.find(media => media.id === oil.acf["ol-bild"]);
-  oil.acf.galleryImages = oil.acf.rezepte?.map((id: number) => media.find(media => media.id === id));
+  oil.acf.postImage = media.find((media) => media.id === oil.acf["ol-bild"]);
+  oil.acf.galleryImages = oil.acf.rezepte?.map((id: number) =>
+    media.find((media) => media.id === id),
+  );
 
   return oil;
-}
+};
 
-const {data: oil, error} = useAsyncData(() => fetchOilContent());
+const { data: oil, error } = useAsyncData(() => fetchOilContent());
 
 const openImageInNewTab = (url: string) => {
-  window.open(url, '_blank');
+  window.open(url, "_blank");
 };
 
 const nl2br = (str: string): string => {
-  return str.replace(/\r\n|\n|\r/g, '<br>' + '\n');
-}
-
+  return str.replace(/\r\n|\n|\r/g, "<br>" + "\n");
+};
 </script>
 
 <template>
@@ -47,9 +48,9 @@ const nl2br = (str: string): string => {
     <title>{{ oil?.title.rendered }} - BMS Oils Academy</title>
   </Head>
   <PageHero
-      backgroundImage="/img/lexikon-detail-header.webp"
-      subtitle="Lexikon"
-      title="BMS OILS ACADEMY"
+    background-image="/img/lexikon-detail-header.webp"
+    subtitle="Lexikon"
+    title="BMS OILS ACADEMY"
   />
   <section v-if="oil" class="topic-actions">
     <div class="container mx-auto">
@@ -63,26 +64,28 @@ const nl2br = (str: string): string => {
     <div class="container mx-auto">
       <div class="topic-content__image__wrapper">
         <img
-            :src="oil.acf.postImage?.source_url"
-            alt=""
-            class="topic-content__image"
+          :src="oil.acf.postImage?.source_url"
+          alt=""
+          class="topic-content__image"
         />
       </div>
+      <!-- eslint-disable vue/no-v-html -->
       <div
-          class="topic-content__content"
-          v-html="nl2br(oil.acf.beschreibung)"
+        class="topic-content__content"
+        v-html="nl2br(oil.acf.beschreibung)"
       ></div>
+      <!-- eslint-enable vue/no-vhtml -->
     </div>
   </section>
   <section v-if="oil?.acf.galleryImages" class="topic-gallery">
     <div class="container mx-auto">
       <div class="topic-gallery__wrapper">
         <img
-            v-for="image in oil.acf.galleryImages"
-            :key="image.id"
-            :src="image.source_url"
-            alt=""
-            @click="openImageInNewTab(image.source_url)"
+          v-for="image in oil.acf.galleryImages"
+          :key="image.id"
+          :src="image.source_url"
+          alt=""
+          @click="openImageInNewTab(image.source_url)"
         />
       </div>
     </div>
@@ -178,7 +181,6 @@ const nl2br = (str: string): string => {
 }
 
 .topic-actions .container {
-  border-bottom: 4px solid #DBB03D;
+  border-bottom: 4px solid #dbb03d;
 }
-
 </style>

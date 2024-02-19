@@ -1,27 +1,27 @@
 html {
-    max-width: 125rem;
-    margin: 0 auto;
+  max-width: 125rem;
+  margin: 0 auto;
 }
 
 body {
-    font-family: 'Glacial Indifference', sans-serif;
-    line-height: 1.6;
-    font-size: 18px;
-    font-weight: 400;
-    color: #2b4675;
+  font-family: "Glacial Indifference", sans-serif;
+  line-height: 1.6;
+  font-size: 18px;
+  font-weight: 400;
+  color: #2b4675;
 }
 
 img {
-    max-width: 100%;
-    height: auto;
+  max-width: 100%;
+  height: auto;
 }
 
 .sr-only {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    border: 0;
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  border: 0;
 }
