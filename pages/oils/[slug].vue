@@ -43,6 +43,9 @@ const nl2br = (str: string): string => {
 </script>
 
 <template>
+  <Head>
+    <title>{{ oil?.title.rendered }} - BMS Oils Academy</title>
+  </Head>
   <PageHero
       backgroundImage="/img/lexikon-detail-header.webp"
       subtitle="Lexikon"

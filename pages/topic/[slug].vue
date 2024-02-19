@@ -1,4 +1,7 @@
 <template>
+  <Head>
+    <title>{{ topic?.title.rendered }} - BMS Oils Academy</title>
+  </Head>
   <template v-if="!pending">
     <PageHero
       :background-image="topic?.acf.postHeaderUrl"

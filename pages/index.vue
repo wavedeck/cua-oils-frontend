@@ -1,4 +1,7 @@
 <template>
+  <Head>
+    <title>Kundenbereich - BMS Oils Academy</title>
+  </Head>
   <PageHero title="BMS OILS ACADEMY" subtitle="Kundenbereich" />
   <section id="section-6-485" class="ct-section">
     <div class="container mx-auto">

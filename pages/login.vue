@@ -25,6 +25,9 @@ const signInWithPassword = async () => {
 </script>
 
 <template>
+  <Head>
+    <title>Login - BMS Oils Academy</title>
+  </Head>
   <main class="login-page">
     <div class="login-image-wrapper">
       <img

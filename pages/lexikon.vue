@@ -47,6 +47,9 @@ const getOilsForLetter = (letter: string) => {
 </script>
 
 <template>
+  <Head>
+    <title>Lexikon - BMS Oils Academy</title>
+  </Head>
   <PageHero background-image="/img/lexikon-header.webp" subtitle="Lexikon" title="BMS Oils Academy"/>
   <section>
     <div class="container mx-auto py-8">
