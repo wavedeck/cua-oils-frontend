@@ -2,6 +2,14 @@
   <section class="overview-topic-list">
     <div class="container mx-auto">
       <div class="overview-topic-list__wrapper">
+        <div class="overview-topic-list__topic">
+          <NuxtLink to="/lexikon" class="topic__linkwrapper"
+            ><img
+              src="https://www.bms-oils.com/wp-content/uploads/2024/02/oele_lexikon.webp"
+              alt="BMS Oils Lexikon"
+              class="topic__image"
+          /></NuxtLink>
+        </div>
         <div
           v-for="topic in data?.topics"
           :key="topic.id"
