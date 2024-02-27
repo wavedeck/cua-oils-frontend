@@ -18,7 +18,7 @@ const signInWithPassword = async () => {
   });
 
   if (error) alert(error.message);
-  if (data.user) navigateTo("/confirm");
+  if (data.user) navigateTo("/auth/confirm");
 
   authLoading.value = false;
 };
@@ -76,7 +76,9 @@ const signInWithPassword = async () => {
             </div>
           </div>
           <div class="login-form__actions">
-            <a class="login-form__action action--forgot" href="/forgot-password"
+            <a
+              class="login-form__action action--forgot"
+              href="/auth/recover-account"
               >Passwort vergessen?</a
             >
           </div>
